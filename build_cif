@@ -1,0 +1,54 @@
+#!/bin/bash
+
+SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
+BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
+FB='/Users/rcbranham/code/sazerac/aem_fireball/'
+BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
+CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
+PROJ=""
+
+type aemsync &>/dev/null || printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "
+
+
+if [ "$#" -eq 1 ]; then
+	PROJ=$1
+elif [ "$#" -eq 2 ]; then
+	PROJ=$2	
+fi
+
+
+case $1 in
+	cif | CIF)
+	  echo '[+] building cif react-components';
+	  (cd $SCC/react-components/; npm run webpack:dev && echo 'done';)
+	  ;;
+	
+	-h | -H | --help)
+	  printf 'To build CIF and MrBoston \n[+] Usage: <script.sh> cif mrboston\n';
+	  printf '\nTo build without CIF \n[+] Usage: <script.sh> mrboston\n';
+	  exit;
+	  ;;
+esac
+
+case $PROJ in
+
+	BTD | btd | Btd)
+	  echo '[+] building BTD';
+	  (cd $BTD/ui.frontend/; npm run dev && echo 'done';)
+	  (cd $BTD/$CLILIBS/buffalotracedistillery/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+	  ;;
+
+	mrboston | MrBoston)
+	  echo '[+] building mrboston'
+	  (cd $BOST/ui.frontend/; npm run dev && echo 'done';)
+	  (cd $BOST/$CLILIBS/mrboston/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+	  ;;
+
+	fireball | Fireball)
+	  echo '[+] building fireball'
+	  (cd $FB/ui.frontend/; npm run dev && echo 'done';)
+	  (cd $FB/$CLILIBS/fireball/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+	  ;;
+esac
+
+
