@@ -9,8 +9,12 @@ PROJ=""
 
 type aemsync &>/dev/null || printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "
 
+if ["$#" -eq 0 ]; then
+	printf 'To build CIF and MrBoston \n[+] Usage: <script.sh> cif mrboston\n';
+	printf '\nTo build without CIF \n[+] Usage: <script.sh> mrboston\n';
+	exit;
 
-if [ "$#" -eq 1 ]; then
+elif [ "$#" -eq 1 ]; then
 	PROJ=$1
 elif [ "$#" -eq 2 ]; then
 	PROJ=$2	
