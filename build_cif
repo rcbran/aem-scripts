@@ -7,7 +7,7 @@ BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
 CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
 PROJ=""
 
-type aemsync &>/dev/null || printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "
+type aemsync &>/dev/null || (printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "; exit;)
 
 if ["$#" -eq 0 ]; then
 	printf 'To build CIF and MrBoston \n[+] Usage: <script.sh> cif mrboston\n';
