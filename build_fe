@@ -4,18 +4,22 @@
 # nvm -- (node@10 and node@12)
 # aemsync (cmdline version)
 
-##  CHANGE THESE	
+##  CHANGE THESE FOR YOUR ENVIRONMENT ##	
 SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
 BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
 FB='/Users/rcbranham/code/sazerac/aem_fireball/'
 BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
 SOCO='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
+NVM_HOME='~/.nvm/nvm.sh'
 ##
 
 main() {
 	# check for aemsync and nvm  
-	type aemsync &>/dev/null || { echo "aemsync is required, but it's not installed. Aborting."; exit 1; }
-	{ . ~/.nvm/nvm.sh; command -v nvm >/dev/null; } || { echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
+	type aemsync &>/dev/null || 
+		{ echo "aemsync is required, but it's not installed. Aborting."; exit 1; }
+	
+	{ . $NVM_HOME; command -v nvm >/dev/null; } || 
+		{ echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
 	
 	# print usage and exit if no cmd line args
 	if [ "$#" -eq 0  ]; then
@@ -31,7 +35,7 @@ main() {
 				;;
 
 			cif | CIF)
-				build_cif $SCC $CLILIBS
+				build_cif 
 				;;
 
 			BTD | btd | Btd)
@@ -53,38 +57,42 @@ main() {
 	done
 }
 
+build_cif() {
+	echo '[+] building cif react-components';
+	. $NVM_HOME;
+	(cd $SCC/react-components/; pwd; nvm use 12; npm run webpack:dev && echo 'done';)
+}
+
 build_btd() {
 	echo '[+] building BTD';
-	. ~/.nvm/nvm.sh;
+	. $NVM HOME;
 	(cd $BTD/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
-	(cd $BTD/ui.apps/src/main/content/jcr_root/apps/buffalotracedistillery/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+	(cd $BTD/ui.apps/src/main/content/jcr_root/apps/buffalotracedistillery/clientlibs/; 
+		aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_bost() {
 	echo '[+] building mrboston';
-	. ~/.nvm/nvm.sh;
+	. $NVM_HOME;
 	(cd $BOST/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
-	(cd $BOST/ui.apps/src/main/content/jcr_root/apps/mrboston/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+	(cd $BOST/ui.apps/src/main/content/jcr_root/apps/mrboston/clientlibs/; 
+	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_fb() {
 	echo '[+] building fireball';
-	. ~/.nvm/nvm.sh;
+	. $NVM_HOME;
 	(cd $FB/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
-	(cd $FB/ui.apps/src/main/content/jcr_root/apps/fireball/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
-}
-
-build_cif() {
-	echo '[+] building cif react-components';
-	. ~/.nvm/nvm.sh;
-	(cd $SCC/react-components/; pwd; nvm use 12; npm run webpack:dev && echo 'done';)
+	(cd $FB/ui.apps/src/main/content/jcr_root/apps/fireball/clientlibs/; 
+	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_soco() {
 	echo '[+] building soco';
-	. ~/.nvm/nvm.sh;
+	. $NVM_HOME;
 	(cd $SOCO/ui.frontend.soco/; nvm use 10; npm run dev && echo 'done';)
-	(cd $SOCO/ui.apps/src/main/content/jcr_root/apps/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
+	(cd $SOCO/ui.apps/src/main/content/jcr_root/apps/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; 
+	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
 }
 
 usage() {
