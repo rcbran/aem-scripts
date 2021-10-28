@@ -17,9 +17,6 @@ main() {
 	type aemsync &>/dev/null || printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "
 
 	if [ "$#" -eq 0  ]; then
-		echo "args = " + $#
-		echo $1
-		echo $2
 		usage
 	fi
 
@@ -27,7 +24,6 @@ main() {
 	do
     		case $var in
 			-h | -H | --help | help | Help)
-				echo "in -h"
 				usage
 				;;
 
