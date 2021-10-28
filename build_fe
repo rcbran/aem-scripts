@@ -14,10 +14,11 @@ NVM_HOME='~/.nvm/nvm.sh'
 ##
 
 main() {
-	# check for aemsync and nvm  
+	# check for aemsync  
 	type aemsync &>/dev/null || 
 		{ echo "aemsync is required, but it's not installed. Aborting."; exit 1; }
-	
+
+	# check for nvm
 	{ . $NVM_HOME; command -v nvm >/dev/null; } || 
 		{ echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
 	
