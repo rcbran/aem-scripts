@@ -13,14 +13,17 @@ SOCO='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
 CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
 
 main() {
+	# check for aemsync and nvm  
+	. ~/.nvm/nvm.sh >/dev/null
+	type aemsync &>/dev/null || { echo "aemsync is required, but it's not installed. Aborting."; exit 1; }
+	command -v nvm >/dev/null || { echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
 	
-	type aemsync &>/dev/null || printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "
-	type nvm &>/dev/null || printf "nvm not installed, please install nvm and node@10 and node@12"
-
+	# print usage if no cmd line args
 	if [ "$#" -eq 0  ]; then
 		usage
 	fi
-
+	
+	# loop through args and build each 
 	for var in "$@"
 	do
     		case $var in
@@ -52,33 +55,37 @@ main() {
 }
 
 build_btd() {
+	. ~/.nvm/nvm.sh
 	echo '[+] building BTD';
 	(cd $BTD/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $BTD/$CLILIBS/buffalotracedistillery/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_bost() {
+	. ~/.nvm/nvm.sh
 	echo '[+] building mrboston';
 	(cd $BOST/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $BOST/$CLILIBS/mrboston/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_fb() {
+	. ~/.nvm/nvm.sh
 	echo '[+] building fireball'
 	(cd $FB/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $FB/$CLILIBS/fireball/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_cif() {
+	. ~/.nvm/nvm.sh
 	echo '[+] building cif react-components';
 	(cd $SCC/react-components/; pwd; nvm use 12; npm run webpack:dev && echo 'done';)
 }
 
 build_soco() {
-	echo '[-] soco not supported'
-	#echo '[+] building soco';
-	#(cd $SOCO/ui.frontend.soco/; nvm use 10; npm run dev && echo 'done';)
-	#(cd $SOCO/$CLILIBS/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
+	. ~/.nvm/nvm.sh >/dev/null
+	echo '[+] building soco';
+	(cd $SOCO/ui.frontend.soco/; nvm use 10; npm run dev && echo 'done';)
+	(cd $SOCO/$CLILIBS/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
 }
 
 usage() {
