@@ -1,0 +1,93 @@
+#!/bin/bash
+
+
+##  CHANGE THESE	
+SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
+BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
+FB='/Users/rcbranham/code/sazerac/aem_fireball/'
+BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
+SOCO='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
+
+
+## This will be the same for everyone 
+CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
+
+main() {
+	
+	type aemsync &>/dev/null || printf "aemsync not installed, please install with\n\n[+]npm install aemsync -g "
+
+	if [ "$#" -eq 0  ]; then
+		echo "args = " + $#
+		echo $1
+		echo $2
+		usage
+	fi
+
+	for var in "$@"
+	do
+    		case $var in
+			-h | -H | --help | help | Help)
+				echo "in -h"
+				usage
+				;;
+
+			cif | CIF)
+				build_cif $SCC $CLILIBS
+				;;
+
+			BTD | btd | Btd)
+	  			build_btd
+	  			;;
+
+			mrboston | MrBoston)
+	  			build_bost
+	  			;;
+
+			fireball | Fireball)
+	  			build_fb
+	  			;;
+
+			soco | Soco)
+				build_soco
+				;;
+		esac
+	done
+}
+
+build_btd() {
+	echo '[+] building BTD';
+	(cd $BTD/ui.frontend/; npm run dev && echo 'done';)
+	(cd $BTD/$CLILIBS/buffalotracedistillery/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+}
+
+build_bost() {
+	echo '[+] building mrboston';
+	(cd $BOST/ui.frontend/; npm run dev && echo 'done';)
+	(cd $BOST/$CLILIBS/mrboston/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+}
+
+build_fb() {
+	echo '[+] building fireball'
+	(cd $FB/ui.frontend/; npm run dev && echo 'done';)
+	(cd $FB/$CLILIBS/fireball/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+}
+
+build_cif() {
+	echo '[+] building cif react-components';
+	(cd $SCC/react-components/; pwd; npm run webpack:dev && echo 'done';)
+}
+
+build_soco() {
+	echo '[-] soco not supported'
+	#echo '[+] building soco';
+	#(cd $SOCO/ui.frontend.soco/; npm run dev && echo 'done';)
+	#(cd $SOCO/$CLILIBS/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
+}
+
+usage() {
+	printf 'To build CIF and (MrBoston | Fireball | BTD | SOCO) \n[+] Usage: <script.sh> cif mrboston\n';
+	printf '\nTo build without CIF \n[+] Usage: <script.sh> mrboston\n';
+	exit;
+}
+
+main "$@"
