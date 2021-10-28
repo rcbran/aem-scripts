@@ -61,12 +61,14 @@ main() {
 	done
 }
 
+# build CIF react-components with node v12
 build_cif() {
 	echo '[+] building cif react-components';
 	eval $NVM_HOME;
 	(cd $SCC/react-components/; pwd; nvm use 12; npm run webpack:dev && echo 'done';)
 }
 
+# build BTD frontend with node v12
 build_btd() {
 	echo '[+] building BTD';
 	eval $NVM_HOME;
@@ -75,6 +77,7 @@ build_btd() {
 		aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
+# build Mr Boston frontend with node v12
 build_bost() {
 	echo '[+] building mrboston';
 	eval $NVM_HOME;
@@ -83,6 +86,7 @@ build_bost() {
 	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
+# build Fireball frontend with node v12
 build_fb() {
 	echo '[+] building fireball';
 	eval $NVM_HOME;
@@ -91,6 +95,7 @@ build_fb() {
 	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
+# build Southern Comfort frontend with node v10
 build_soco() {
 	echo '[+] building soco';
 	eval $NVM_HOME;
@@ -99,9 +104,10 @@ build_soco() {
 	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
 }
 
+# print usage and exit
 usage() {
-	printf 'To build CIF and (MrBoston | Fireball | BTD | SOCO) \n[+] Usage: <script.sh> cif mrboston\n';
-	printf '\nTo build without CIF \n[+] Usage: <script.sh> mrboston\n';
+	printf '\n[+] Sites will be built in order given -- 
+	printf '\n[+] Usage: <script.sh> cif mrboston btd fireball';
 	exit 1;
 }
 
