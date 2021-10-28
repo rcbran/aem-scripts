@@ -56,34 +56,34 @@ main() {
 CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
 build_btd() {
 	echo '[+] building BTD';
-	. ~/.nvm/nvm.sh
+	. ~/.nvm/nvm.sh;
 	(cd $BTD/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $BTD/$CLILIBS/buffalotracedistillery/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_bost() {
 	echo '[+] building mrboston';
-	. ~/.nvm/nvm.sh
+	. ~/.nvm/nvm.sh;
 	(cd $BOST/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $BOST/$CLILIBS/mrboston/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_fb() {
 	echo '[+] building fireball';
-	. ~/.nvm/nvm.sh
+	. ~/.nvm/nvm.sh;
 	(cd $FB/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $FB/$CLILIBS/fireball/clientlibs/; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 }
 
 build_cif() {
 	echo '[+] building cif react-components';
-	. ~/.nvm/nvm.sh
+	. ~/.nvm/nvm.sh;
 	(cd $SCC/react-components/; pwd; nvm use 12; npm run webpack:dev && echo 'done';)
 }
 
 build_soco() {
 	echo '[+] building soco';
-	. ~/.nvm/nvm.sh
+	. ~/.nvm/nvm.sh;
 	(cd $SOCO/ui.frontend.soco/; nvm use 10; npm run dev && echo 'done';)
 	(cd $SOCO/$CLILIBS/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
 }
