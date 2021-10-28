@@ -102,7 +102,7 @@ build_soco() {
 usage() {
 	printf 'To build CIF and (MrBoston | Fireball | BTD | SOCO) \n[+] Usage: <script.sh> cif mrboston\n';
 	printf '\nTo build without CIF \n[+] Usage: <script.sh> mrboston\n';
-	exit;
+	exit 1;
 }
 
 main "$@"
