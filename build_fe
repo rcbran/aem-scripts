@@ -106,8 +106,8 @@ build_soco() {
 
 # print usage and exit
 usage() {
-	printf '\n[+] Sites will be built in order given -- 
-	printf '\n[+] Usage: <script.sh> cif mrboston btd fireball';
+	printf '\n[+] Will build the frontend on all sites given through cmd line args --' 
+	printf '\n\n[+] Usage: <script.sh> cif mrboston btd fireball soco\n\n';
 	exit 1;
 }
 
