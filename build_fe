@@ -15,7 +15,7 @@ SOCO='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
 main() {
 	# check for aemsync and nvm  
 	type aemsync &>/dev/null || { echo "aemsync is required, but it's not installed. Aborting."; exit 1; }
-	{ . ~/.nvm/nvm.sh; command -v nvm >/dev/null } || { echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
+	{ . ~/.nvm/nvm.sh; command -v nvm >/dev/null; } || { echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
 	
 	# print usage if no cmd line args
 	if [ "$#" -eq 0  ]; then
