@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## Requirements
+# nvm -- (node@10 and node@12)
+# aemsync (cmdline version)
 
 ##  CHANGE THESE	
 SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
@@ -7,10 +10,7 @@ BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
 FB='/Users/rcbranham/code/sazerac/aem_fireball/'
 BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
 SOCO='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
-
-
-## This will be the same for everyone 
-CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
+##
 
 main() {
 	# check for aemsync and nvm  
@@ -53,6 +53,7 @@ main() {
 	done
 }
 
+CLILIBS='ui.apps/src/main/content/jcr_root/apps/'
 build_btd() {
 	echo '[+] building BTD';
 	. ~/.nvm/nvm.sh
