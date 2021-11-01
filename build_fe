@@ -1,28 +1,30 @@
 #!/bin/bash
 
 ## This script can build
-# -  /react-components on Sazerac Cif Core Components
+# -  /react-components on Saz Cif Core Components
 # -  /ui.frontend on (BTD, Mr Boston, Fireball, SOCO)
-# 
-# Projects will be built in order supplied. Can pass up to 5.
 # 
 # [+] <script.sh> cif mrboston fireball soco btd
 
 
 ## Requirements
-# nvm -- (node@10 and node@12)
-# aemsync (cmdline version)
+# npm			-- ($ brew install node)
+# aemsync 		-- ($ npm install aemsync -g)
+# nvm 			-- ($ brew install nvm)
+#   -> node v10		-- ($ nvm install node 10)
+#   -> node v12		__ ($ nvm install node 12)
 
-##  CHANGE THESE FOR YOUR ENVIRONMENT ##	
+
+########################################
+##  CHANGE THESE FOR YOUR ENVIRONMENT ##
+########################################
 SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
 BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
 FB='/Users/rcbranham/code/sazerac/aem_fireball/'
 BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
-SOCO='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
+BP='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
 NVM_HOME='. ~/.nvm/nvm.sh'
-##
-
-
+########################################
 
 
 main() {
@@ -34,7 +36,7 @@ main() {
 	{ eval $NVM_HOME; command -v nvm >/dev/null; } || 
 		{ echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
 	
-	# print usage and exit if no cmd line args
+	# print usage and exit if no args
 	if [ "$#" -eq 0  ]; then
 		usage
 	fi
@@ -108,16 +110,18 @@ build_fb() {
 build_soco() {
 	echo '[+] building soco';
 	eval $NVM_HOME;
-	(cd $SOCO/ui.frontend.soco/; nvm use 10; npm run dev && echo 'done';)
-	(cd $SOCO/ui.apps/src/main/content/jcr_root/apps/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; 
+	(cd $BP/ui.frontend.soco/; nvm use 10; npm run dev && echo 'done';)
+	(cd $BP/ui.apps/src/main/content/jcr_root/apps/sazerac-aem-blueprint/clientlibs/soco/clientlib-site-soco; 
 	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
 }
 
 # print usage and exit
 usage() {
-	printf '\n[+] Will build the frontend on all sites given through cmd line args'
-	printf '\n[+] Projects will be built in order supplied. Can pass up to 5.'
-	printf '\n\n[+] Usage: <script.sh> cif mrboston btd fireball soco\n\n';
+	printf '\n[+] ##[+] This script can build\n
+# -  /react-components on Saz Cif Core Components\n
+# -  /ui.frontend on (BTD, Mr Boston, Fireball, SOCO)\n
+# 
+# [+] <script.sh> cif mrboston fireball soco btd';
 	exit 1;
 }
 
