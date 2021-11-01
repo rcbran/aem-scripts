@@ -8,7 +8,7 @@
 
 
 ## Requirements
-# npm			-- ($ brew install node)
+# npm			
 # aemsync 		-- ($ npm install aemsync -g)
 # nvm 			-- ($ brew install nvm)
 #   -> node v10		-- ($ nvm install node 10)
