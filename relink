@@ -27,7 +27,7 @@ main() {
 	# rebuild and relink saz cif core components
 	echo '[+] building cif react-components';
 	eval $NVM_HOME;
-	(cd $SCC/react-components/; git pull; nvm use 12; npm run webpack:dev && npm link && echo 'done';)
+	(cd $SCC; git pull; cd react-components; nvm use 12; npm run webpack:dev && npm link && echo 'done';)
 
 	# rebuild BTD
 	echo '[+] building BTD fedDev'

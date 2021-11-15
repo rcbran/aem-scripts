@@ -76,7 +76,7 @@ main() {
 build_cif() {
 	echo '[+] building cif react-components';
 	eval $NVM_HOME;
-	(cd $SCC/react-components/; pwd; nvm use 12; npm run webpack:dev && echo 'done';)
+	(cd $SCC/react-components/; nvm use 12; npm run webpack:dev && echo 'done';)
 }
 
 # build BTD frontend with node v12
