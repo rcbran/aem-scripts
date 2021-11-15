@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# for saz cif core & btd
+# - pull latest git changes
+# - rebuild cif core & rebuild btd with feddev
+# - rebuild front ends 2nd time 
+
+## Requirements
+# nvm -- (node@10 and node@12)
+# aemsync (cmdline version)
+
+##  CHANGE THESE FOR YOUR ENVIRONMENT ##
+SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
+BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
+NVM_HOME='. ~/.nvm/nvm.sh'
+
+main() {
+	# check for aemsync
+	type aemsync &>/dev/null ||
+		{ echo "aemsync is required, but it's not installed. Aborting."; exit 1; }
+
+	# check for nvm
+	{ eval $NVM_HOME; command -v nvm >/dev/null; } ||
+		{ echo "nvm is required, but it's not installed.  Aborting."; exit 1; }
+
+
+	# rebuild and relink saz cif core components
+	echo '[+] building cif react-components';
+	eval $NVM_HOME;
+	(cd $SCC/react-components/; git pull; nvm use 12; npm run webpack:dev && npm link && echo 'done';)
+
+	# rebuild BTD
+	echo '[+] building BTD fedDev'
+	eval $NVM_HOME;
+	(cd $BTD; git pull; mvn clean install -P autoInstallPackage,fedDev && echo 'done')
+
+	# rebuiling Front Ends
+	echo '[+] rebuilding saz cif core front end'
+	(cd $SCC/react-components/; nvm use 12; npm run webpack:dev && echo 'done')
+	echo '[+] rebuilding btd front end'
+	(cd $BTD/ui.frontend; npm run dev && echo 'done')
+	(cd $BTD/ui.apps/src/main/content/jcr_root/apps/buffalotracedistillery/clientlibs/;
+		aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+
+	echo '[+] Done, BTD and saz cif core relinked & rebuilt'
+}
