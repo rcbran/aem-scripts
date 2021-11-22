@@ -10,9 +10,9 @@
 # aemsync (cmdline version)
 
 ##  CHANGE THESE FOR YOUR ENVIRONMENT ##
-SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
-BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
-NVM_HOME='. ~/.nvm/nvm.sh'
+SCC=''
+BTD=''
+NVM_HOME=''
 
 main() {
 	# check for aemsync
