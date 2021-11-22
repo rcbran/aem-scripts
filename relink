@@ -5,9 +5,11 @@
 # - rebuild cif core & rebuild btd with feddev
 # - rebuild front ends 2nd time 
 
-## Requirements
-# nvm -- (node@10 and node@12)
-# aemsync (cmdline version)
+## Requirements			
+# aemsync 		
+# nvm 			
+#   -> node v10		
+#   -> node v12		
 
 ##  CHANGE THESE FOR YOUR ENVIRONMENT ##
 SCC=''
