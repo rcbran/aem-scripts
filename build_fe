@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## This script can build
-# -  /react-components on Saz Cif Core Components
+# -  /react-components on Cif Core Components
 # -  /ui.frontend on (BTD, Mr Boston, Fireball, SOCO)
 # 
 # [+] <script.sh> cif mrboston fireball soco btd
@@ -18,12 +18,12 @@
 ########################################
 ##  CHANGE THESE FOR YOUR ENVIRONMENT ##
 ########################################
-SCC='/Users/rcbranham/code/sazerac/sazerac-cif-core-components/'
-BTD='/Users/rcbranham/code/sazerac/aem_buffalotracedistillery/'
-FB='/Users/rcbranham/code/sazerac/aem_fireball/'
-BOST='/Users/rcbranham/code/sazerac/aem_mr_boston/'
-BP='/Users/rcbranham/code/sazerac/aem_sazerac_blueprint/'
-NVM_HOME='. ~/.nvm/nvm.sh'
+SCC=''
+BTD=''
+FB=''
+BOST=''
+BP=''
+NVM_HOME=''
 ########################################
 
 
