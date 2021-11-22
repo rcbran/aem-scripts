@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# for saz cif core & btd
+# forceful git pull, relink, and rebuild
 # - pull latest git changes
 # - rebuild cif core & rebuild btd with feddev
 # - rebuild front ends 2nd time 
