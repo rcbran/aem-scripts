@@ -68,7 +68,7 @@ main() {
 			soco | Soco)
 				build_soco
 				;;
-			hvt || HVT || haverty || havertys
+			hvt || HVT || haverty || havertys)
 				build_hvt
 				;;
 		esac
@@ -124,7 +124,7 @@ build_hvt() {
 	eval $NVM_HOME
 	(cd $HVT/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $HVT/src/main/content/jcr_root/apps/havertys/clientlibs/; 
-	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site-soco/;)
+	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
 
 # print usage and exit
 usage() {
