@@ -125,6 +125,7 @@ build_hvt() {
 	(cd $HVT/ui.frontend/; nvm use 12; npm run dev && echo 'done';)
 	(cd $HVT/ui.apps/src/main/content/jcr_root/apps/havertys/clientlibs/; 
 	 	aemsync -t http://admin:admin@localhost:4502 -p clientlib-site/;)
+}
 
 # print usage and exit
 usage() {
