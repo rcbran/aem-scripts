@@ -71,6 +71,9 @@ main() {
 			hvt | HVT | haverty | havertys)
 				build_hvt
 				;;
+			*)
+				usage
+				;;
 		esac
 	done
 }
@@ -133,7 +136,7 @@ usage() {
 # -  /react-components on Saz Cif Core Components\n
 # -  /ui.frontend on (BTD, Mr Boston, Fireball, SOCO, Havertys)\n
 # 
-# [+] <script.sh> cif mrboston fireball soco btd';
+# [+] <script.sh> hvt';
 	exit 1;
 }
 
