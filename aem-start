@@ -1,0 +1,19 @@
+#!/bin/bash
+
+TMUX_WINDOW=$(tmux ls | grep 'aem' | awk '{ print $1}' | sed 's/://' | xargs)
+PID=$(pgrep -f 'java -jar aem-author-p4502.jar' | xargs)
+STATE=$(ps -o state= -p $PID | xargs)
+
+if ! [[ $TMUX_WINDOW ]]; then
+   tmux new-session -d -s aem
+fi
+
+if [ "$STATE" = "S+" ]; then
+   echo '[-] AEM already running ... exiting'
+elif [ "$STATE" = "T" ]; then
+   echo '[+] Resuming AEM Author instanace ...'
+   tmux send-keys -t aem "clear && fg" Enter
+else
+   echo '[+] Starting new AEM Author instance'
+   tmux send-keys -t aem "cd /opt/aem/author/ && java -jar aem-author-p4502.jar" Enter
+fi
