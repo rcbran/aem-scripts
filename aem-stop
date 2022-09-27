@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TMUX_WINDOW=$(tmux ls | grep 'aem' | awk '{ print $1}' | sed 's/://')
+PID=$(pgrep -l java -jar aem-author-p4502.jar)
+COUNT=0
+
+echo '[-] Attempting to stop AEM Author instance ...'
+echo $PID
+pgrep java -jar aem-author-p4502.jar | while read line ; do kill -STOP $line ; done
+
+#tmux ls | grep 'aem' | awk '{ print $1}' | sed 's/://' | while read line ; do tmux kill-session -s $line ; done
+echo '[+] Done'
