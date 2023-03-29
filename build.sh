@@ -41,7 +41,7 @@ build_fb() {
     	(cd ./fireball; $FULL_BUILD;)
 }
 
-build_mb() {
+build_bost() {
 	echo -e "\n[+] building global + mrboston";
 	(cd ./global; $FULL_BUILD;)
 	(cd ./mrboston; $FULL_BUILD;)
