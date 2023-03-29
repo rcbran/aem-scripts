@@ -32,24 +32,24 @@ main() {
 build_btd() {
 	echo -e "\n[+] building global + btd";
 	(cd ./global; $FULL_BUILD;)
-    (cd ./buffalotracedistillery; $FULL_BUILD;)
+    	(cd ./buffalotracedistillery; $FULL_BUILD;)
 }
 
 build_fb() {
-    echo -e "\n[+] building global + fireball";
+	echo -e "\n[+] building global + fireball";
 	(cd ./global; $FULL_BUILD;)
-    (cd ./fireball; $FULL_BUILD;)
+    	(cd ./fireball; $FULL_BUILD;)
 }
 
 build_mb() {
-    echo -e "\n[+] building global + mrboston";
+	echo -e "\n[+] building global + mrboston";
 	(cd ./global; $FULL_BUILD;)
-    (cd ./mrboston; $FULL_BUILD;)
+	(cd ./mrboston; $FULL_BUILD;)
 }
 
 usage() {
 	echo -e "\nFailed to parse args"
-    echo -e " - available args: fb, btd, mrboston\n"
+	echo -e " - available args: fb, btd, mrboston\n"
 	exit 1;
 }
 
